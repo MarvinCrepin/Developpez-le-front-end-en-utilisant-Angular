@@ -30,11 +30,9 @@ export class OlympicService {
     this.olympics$.pipe(
       map(olympics => olympics.find((olympic: Olympic) =>
         olympic.country.toLocaleLowerCase() === country.toLocaleLowerCase()
-      )));
-
-  errorWithOlympics$ = throwError(() => {
-    const error: any = new Error(`There is an error with fetching Olympics data.`);
-    error.timestamp = Date.now();
-    return error;
-  });
+      )), catchError((error, caught) => {
+        this.olympics$.unsubscribe();
+        this.router.navigateByUrl("/not-found")
+        throw new Error(error)
+      }));
 }

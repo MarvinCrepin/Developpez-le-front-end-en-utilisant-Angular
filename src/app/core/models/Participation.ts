@@ -1,4 +1,4 @@
-export interface Participation {
+export default interface Participation {
     id: number;
     year: number;
     city: string;
