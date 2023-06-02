@@ -1,6 +1,6 @@
-import Participation  from "./Participation";
+import Participation from "./Participation";
 
-export interface Olympic {
+export default interface Olympic {
     id: number;
     country: string;
     participations: Participation[];
