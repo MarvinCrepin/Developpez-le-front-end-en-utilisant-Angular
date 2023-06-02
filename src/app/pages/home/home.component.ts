@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       });
   };
 
-  getCountry(e: Event): void {
-
+  getCountry({element}: any): void {
+    this.router.navigateByUrl(`/details/${element.index + 1}`);
   }
 }

@@ -1,0 +1,66 @@
+$mainColor: #59909e;
+
+@font-face {
+    font-family: "Acherus";
+    src: url("../../assets/fonts/Acherus.ttf");
+}
+
+* {
+    font-family: "Acherus";
+}
+
+.title {
+    text-align: center;
+    background-color: $mainColor;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    flex: 1;
+    width: 50%;
+    margin: auto;
+}
+
+.center {
+    margin: auto;
+    text-align: center;
+}
+
+.row {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    border: 4px solid $mainColor;
+    text-align: center;
+    border-radius: 10px;
+    width: 30%;
+    margin: 5px;
+}
+
+.bottom {
+    margin-top: 20px;
+}
+
+.chart-container {
+    max-width: 700px;
+    max-height: 700px;
+    margin: auto;
+    margin-top: 3em;
+    justify-content: center;
+}
+
+.mt-2 {
+    margin-top: 2em;
+}
+@media (max-width: 700px) {
+    .row {
+        flex-direction: column;
+    }
+}

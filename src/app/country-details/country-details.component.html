@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="title">
+        <h1>{{country}}</h1>
+    </div>
+    <div class="row">
+        <div class="column">
+            <p>Number of entries</p>
+            <p> <b> {{entries}} </b> </p>
+        </div>
+        <div class="column">
+            <p>Total number of medals</p>
+            <p> <b> {{medalsCount}} </b> </p>
+        </div>
+        <div class="column">
+            <p> Total number of athletes</p>
+            <p><b> {{athletesCount}} </b> </p>
+        </div>
+    </div>
+    <div class="chart-container">
+        <p-chart class="bar-chart" type="bar" [data]="data" [options]="options"></p-chart>
+    </div>
+    <div class="center mt-2">
+        <a routerLink="">Go back</a>
+      </div>
+</div>

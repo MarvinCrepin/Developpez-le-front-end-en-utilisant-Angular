@@ -26,11 +26,11 @@ export class OlympicService {
     return this.olympics$.asObservable();
   }
 
-  public getOlympicByCountryName = (country: string) =>
+  public getOlympicById = (id: number) =>
     this.olympics$.pipe(
-      map(olympics => olympics.find((olympic: Olympic) =>
-        olympic.country.toLocaleLowerCase() === country.toLocaleLowerCase()
-      )), catchError((error, caught) => {
+      map(olympics => {
+        return olympics.find((olympic: Olympic) => olympic.id === +id)
+      }), catchError((error, caught) => {
         this.olympics$.unsubscribe();
         this.router.navigateByUrl("/not-found")
         throw new Error(error)
