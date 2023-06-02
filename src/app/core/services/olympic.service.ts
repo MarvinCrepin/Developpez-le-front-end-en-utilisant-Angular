@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
-import Olympic  from '../models/Olympic';
+import Olympic from '../models/Olympic';
 @Injectable({
   providedIn: 'root',
 })
@@ -35,6 +35,4 @@ export class OlympicService {
         this.router.navigateByUrl("/not-found")
         throw new Error(error)
       }));
-
-  
 }

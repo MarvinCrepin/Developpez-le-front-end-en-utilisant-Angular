@@ -44,7 +44,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         next: (olympics: Olympic[]) => {
           const labels: string[] = olympics.map((olympic) => olympic.country)
           const medalsCount: number[] = olympics.map((olympic) => olympic.participations.reduce((previousValue, {medalsCount}) => previousValue + medalsCount, 0))
-          console.log(medalsCount)
           this.olympicCount = olympics.map((olympic) => olympic.participations.length)[0]
           this.data = {
             labels: labels,
