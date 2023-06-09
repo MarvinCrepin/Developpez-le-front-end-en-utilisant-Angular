@@ -25,7 +25,7 @@ export class OlympicService {
   public getOlympics() {
     return this.olympics$.asObservable();
   }
-
+  // Prend un ID en paramètre et renvoie un Olympic qui correspond si l'ID existe, sinon je catch l'erreur et renvoie vers la page "not-found"
   public getOlympicById = (id: number) =>
     this.olympics$.pipe(
       map(olympics => {

@@ -47,7 +47,7 @@ export class CountryDetailsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subs.unsubscribe();
   }
-
+  // Data handling et génération des paramètres d'entrées de mon graphique
   private getOlympicByCountry(): Subscription {
     const id: number = Number(this.route.snapshot.paramMap.get('id'));
     return this.olympicService.getOlympicById(id).subscribe(
