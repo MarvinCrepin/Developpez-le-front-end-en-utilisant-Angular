@@ -2,7 +2,9 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
 
-I used [npm](https://www.npmjs.com/) 8.1.5 & [node](https://nodejs.org/) 18.16
+[npm](https://www.npmjs.com/) 8.1.5 & [node](https://nodejs.org/) 18.16
+
+[Angular](https://angular.io) 15.1.3
 
 
 Don't forget to install your node_modules before starting (`npm install`).
@@ -17,7 +19,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ### Dependencies
 
-I used [primeng](`https://primeng.org/`) for the charts part.
+I used [primeng](https://primeng.org/) version 15.1.1 for the charts part.
 
 ## Where to start
 
