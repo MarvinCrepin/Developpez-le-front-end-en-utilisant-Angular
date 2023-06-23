@@ -6,23 +6,25 @@ import Olympic from '../core/models/Olympic';
 import { OlympicService } from '../core/services/olympic.service';
 import { throwError } from 'rxjs';
 import Participation from '../core/models/Participation';
+import { ChartData } from '../core/models/ChartData';
 
 @Component({
   selector: 'app-country-details',
   templateUrl: './country-details.component.html',
   styleUrls: ['./country-details.component.scss']
 })
-export class CountryDetailsComponent implements OnInit, OnDestroy {
+export class CountryDetailsComponent implements OnInit {
  
   country!: string;
   entries: number = 0;
   medalsCount!: number;
   athletesCount!: number;
   subs !: Subscription;
-  data!: any;
+  data!: ChartData;
+  olympic?: Olympic
   backgroundColor = ['#B49365', '#A6B7E7', '#7F92DB', '#742D41', '#9F82A1'];
   options = {
-    indexAxis: 'y',
+    indexAxis: 'x',
     plugins: {
       title: {
         display: true,
@@ -41,40 +43,34 @@ export class CountryDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subs = this.getOlympicByCountry();
+    this.getOlympicByCountry();
   }
 
-  ngOnDestroy(): void {
-    this.subs.unsubscribe();
-  }
   // Data handling et génération des paramètres d'entrées de mon graphique
-  private getOlympicByCountry(): Subscription {
+  private getOlympicByCountry() {
     const id: number = Number(this.route.snapshot.paramMap.get('id'));
-    return this.olympicService.getOlympicById(id).subscribe(
-      {
-        next: (olympic: Olympic) => {
-          this.country = olympic.country;
-          const labels = olympic.participations.map((participation: Participation) => participation.year);
-          const data =  olympic.participations.map((participation: Participation) => participation.medalsCount);
-          this.medalsCount = olympic.participations.reduce((previousValue, {medalsCount}) => previousValue + medalsCount, 0)
-          this.athletesCount = olympic.participations.reduce((previousValue, {athleteCount}) => previousValue + athleteCount, 0)
-          this.entries = olympic.participations.length
-          this.data = {
-            labels: labels,
-            datasets: [
-              {
-                data: data,
-                backgroundColor: this.backgroundColor
-              }
-            ]
-          };
-        },
-        error: err => {
-          this.subs.unsubscribe();
-          this.router.navigateByUrl("/not-found")
-        }
-      });
-  }
+    this.olympicService.getOlympicById(id).subscribe(olympic => this.olympic = olympic)
+    if (this.olympic) {
+      this.country = this.olympic.country;
+      const labels = this.olympic.participations.map((participation: Participation) => participation.year);
+      const data =  this.olympic.participations.map((participation: Participation) => participation.medalsCount);
+      this.medalsCount = this.olympic.participations.reduce((previousValue, {medalsCount}) => previousValue + medalsCount, 0)
+      this.athletesCount = this.olympic.participations.reduce((previousValue, {athleteCount}) => previousValue + athleteCount, 0)
+      this.entries = this.olympic.participations.length
+      this.data = {
+        labels: labels,
+        datasets: [
+          {
+            data: data,
+            backgroundColor: this.backgroundColor
+          }
+        ]
+      };
+    } else {
+      this.router.navigateByUrl('/not-found')
+    }
+    }
+        
 
   back(): void {
     this.location.back();
