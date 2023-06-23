@@ -4,6 +4,8 @@ import Olympic from 'src/app/core/models/Olympic';
 import Participation from 'src/app/core/models/Participation';
 import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription } from "rxjs";
+import { ChartEvent } from 'chart.js/dist/core/core.plugins';
+import { ChartData } from 'src/app/core/models/ChartData';
 
 @Component({
   selector: 'app-home',
@@ -11,14 +13,13 @@ import { Subscription } from "rxjs";
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  data!: any;
-  options!: any;
+  data!: ChartData;
   subs !: Subscription;
   countryCount !: number
   olympicCount!: number
   backgroundColors = ['#7E4D71', '#A3B2E1', '#5A6FA4', '#A07D83', '#C9A6B6']
   chartOptions = {
-    "responsive": true,
+    responsive: true,
     maintainAspectRatio: true,
     showScale: false,
   }
@@ -60,7 +61,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       });
   };
 
-  getCountry({element}: any): void {
-    this.router.navigateByUrl(`/details/${element.index + 1}`);
+  getCountry(event: {element: {index: string}}): void {
+    this.router.navigateByUrl(`/details/${event.element.index + 1}`);
   }
 }
