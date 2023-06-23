@@ -5,3 +5,4 @@ export default interface Participation {
     medalsCount: number;
     athleteCount: number;
 }
+
